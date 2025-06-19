@@ -3,80 +3,28 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Restaurant Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 2rem; }
-    h1 { color: green; }
-    select, button { margin-right: 1rem; padding: 0.5rem; }
-    table { border-collapse: collapse; margin-top: 1rem; width: 100%; }
-    th, td { border: 1px solid #ccc; padding: 0.5rem; }
-    th { background: #eee; }
-  </style>
+  <title>Restaurant Dashboard</title>
+  <link href="style.css" rel="stylesheet" />
 </head>
 <body>
-  <h1>📊 Restaurant Dashboard</h1>
-
-  <label for="plaats">📍 Filter op Plaats:</label>
-  <select id="plaats">
-    <option value="">-- Alles --</option>
-    <option value="Almere">Almere</option>
-    <option value="Lelystad">Lelystad</option>
-    <option value="Zweden">Zweden</option>
-  </select>
-
-  <label for="voorkeur">🍗 Filter op Voorkeur:</label>
-  <select id="voorkeur">
-    <option value="">-- Alles --</option>
-    <option value="chicken">Chicken</option>
-    <option value="burger">Burger</option>
-    <option value="popcorn">Popcorn</option>
-    <option value="fries">Fries</option>
-  </select>
-
-  <button onclick="filterData()">🔍 Toon klanten</button>
-  <button onclick="sendEmail()">📩 Verstuur e-mail</button>
-
-  <table id="klanten">
-    <thead>
-      <tr>
-        <th>Naam</th>
-        <th>Email</th>
-        <th>Plaats</th>
-        <th>Voorkeuren</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <script>
-    const data = [
-      { naam: "Mohamed", email: "mohamed@outlook.com", plaats: "Almere", voorkeuren: ["chicken", "fries"] },
-      { naam: "Fatima", email: "fatima@mail.com", plaats: "Lelystad", voorkeuren: ["burger"] },
-      { naam: "Ali", email: "ali@kfc.com", plaats: "Zweden", voorkeuren: ["popcorn", "fries"] },
-    ];
-
-    function filterData() {
-      const plaats = document.getElementById("plaats").value;
-      const voorkeur = document.getElementById("voorkeur").value;
-      const tbody = document.querySelector("#klanten tbody");
-      tbody.innerHTML = "";
-
-      const filtered = data.filter(k => {
-        return (!plaats || k.plaats === plaats) &&
-               (!voorkeur || k.voorkeuren.includes(voorkeur));
-      });
-
-      for (const klant of filtered) {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td>${klant.naam}</td><td>${klant.email}</td><td>${klant.plaats}</td><td>${klant.voorkeuren.join(", ")}</td>`;
-        tbody.appendChild(tr);
-      }
-    }
-
-    function sendEmail() {
-      alert("📤 E-mail trigger verzonden naar Make!");
-    }
-  </script>
+  <div class="container">
+    <h1>📊 Restaurant Dashboard</h1>
+    <div class="filters">
+      <label for="placeFilter">📍 Filter op Plaats:</label>
+      <select id="placeFilter"></select>
+      <label for="preferenceFilter">🍗 Filter op Voorkeur:</label>
+      <select id="preferenceFilter"></select>
+      <button id="loadBtn">🔍 Toon klanten</button>
+      <button id="emailBtn">📩 Verstuur e-mail</button>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Naam</th><th>Email</th><th>Plaats</th><th>Voorkeuren</th></tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
